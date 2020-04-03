@@ -1,0 +1,28 @@
+{
+  "name": "Homework11-Note-Taker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "uuidv1": "^1.6.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/j-senak/Homework11-Note-Taker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/j-senak/Homework11-Note-Taker/issues"
+  },
+  "homepage": "https://github.com/j-senak/Homework11-Note-Taker#readme"
+}

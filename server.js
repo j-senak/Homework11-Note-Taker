@@ -1,14 +1,14 @@
 // Dependencies
 // =============================================================
-var express = require("express");
-var path = require("path");
-var fs = require("fs");
-var uuidv1 = require("uuidv1");
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+const uuidv1 = require("uuidv1");
 
 // Sets up the Express App
 // =============================================================
-var app = express();
-var PORT = 8080;
+const app = express();
+const PORT = process.env.PORT || 8080;
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -70,8 +70,8 @@ app.get("/api/notes", function(req, res) {
 //   res.json(newCharacter);
 // });
 
-// // Starts the server to begin listening
-// // =============================================================
-// app.listen(PORT, function() {
-//   console.log("App listening on PORT " + PORT);
-// });
+// Starts the server to begin listening
+// =============================================================
+app.listen(PORT, function() {
+  console.log(`App listening on http://localhost:${PORT}`);
+});
