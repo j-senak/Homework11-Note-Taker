@@ -3,7 +3,8 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-const uuidv1 = require("uuidv1");
+const { v4: uuidv4 } = require('uuid');
+
 
 // Sets up the Express App
 // =============================================================
@@ -22,15 +23,15 @@ app.use(express.json());
 
 // Basic route that sends the user first to the AJAX Page
 app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "./Develop/public/index.html"));
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 
 app.get("/notes", function(req, res) {
-  res.sendFile(path.join(__dirname, "./Develop/public/notes.html"));
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 
 app.get("/api/notes", function(req, res) {
-  fs.readFile("./Develop/db/db.json","utf8", function(err,r){
+  fs.readFile("./db/db.json","utf8", function(err,r){
     console.log("Res: "+JSON.stringify(r));
 
    // console.log("UUID: "+uuidv1());
@@ -54,11 +55,15 @@ app.get("/api/notes/:id", function(req, res) {
   // return res.json(false);
 });
 
-// // Create New Characters - takes in JSON input
-// app.post("/api/characters", function(req, res) {
-//   // req.body hosts is equal to the JSON post sent from the user
-//   // This works because of our body parsing middleware
-//   var newCharacter = req.body;
+// Create New Characters - takes in JSON input
+app.post("/api/notes", function(req, res) {
+  // req.body hosts is equal to the JSON post sent from the user
+  // This works because of our body parsing middleware
+  var newNote = req.body;
+  newNote.id = uuidv4();
+
+
+
 
 //   // Using a RegEx Pattern to remove spaces from newCharacter
 //   // You can read more about RegEx Patterns later https://www.regexbuddy.com/regex.html
@@ -68,8 +73,8 @@ app.get("/api/notes/:id", function(req, res) {
 
 //   characters.push(newCharacter);
 
-//   res.json(newCharacter);
-// });
+  res.json(newNote);
+});
 
 // Starts the server to begin listening
 // =============================================================
