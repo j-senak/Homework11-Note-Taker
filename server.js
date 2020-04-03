@@ -10,6 +10,8 @@ const uuidv1 = require("uuidv1");
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+var notes = [];
+
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -27,7 +29,6 @@ app.get("/notes", function(req, res) {
   res.sendFile(path.join(__dirname, "./Develop/public/notes.html"));
 });
 
-// Displays all characters
 app.get("/api/notes", function(req, res) {
   fs.readFile("./Develop/db/db.json","utf8", function(err,r){
     console.log("Res: "+JSON.stringify(r));
@@ -38,20 +39,20 @@ app.get("/api/notes", function(req, res) {
   });  
 });
 
-// // Displays a single character, or returns false
-// app.get("/api/characters/:character", function(req, res) {
-//   var chosen = req.params.character;
+// Displays a single note, or returns false
+app.get("/api/notes/:id", function(req, res) {
+  var index = parseInt(req.params.id);
 
-//   console.log(chosen);
+  console.log(index);
+  if (index >= 0 && index < notes.length) {
+    res.json(notes[index]);
+  } else {
+  res.status(404);    
+  return res.send("Unable to find note with that ID. Please try again");
+  }
 
-//   for (var i = 0; i < characters.length; i++) {
-//     if (chosen === characters[i].routeName) {
-//       return res.json(characters[i]);
-//     }
-//   }
-
-//   return res.json(false);
-// });
+  // return res.json(false);
+});
 
 // // Create New Characters - takes in JSON input
 // app.post("/api/characters", function(req, res) {
