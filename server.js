@@ -32,10 +32,11 @@ app.get("/notes", function(req, res) {
 
 app.get("/api/notes", function(req, res) {
   fs.readFile("./db/db.json","utf8", function(err,r){
-    console.log("Res: "+JSON.stringify(r));
+    if (err){
+      return res.send("Problem retrieving notes.")
+    }
 
-   // console.log("UUID: "+uuidv1());
-
+    // console.log("Res: "+JSON.stringify(r));
     return res.json(r);
   });  
 });
@@ -62,6 +63,9 @@ app.post("/api/notes", function(req, res) {
   var newNote = req.body;
   newNote.id = uuidv4();
 
+  res.json(newNote);
+});
+
 
 
 
@@ -72,9 +76,6 @@ app.post("/api/notes", function(req, res) {
 //   console.log(newCharacter);
 
 //   characters.push(newCharacter);
-
-  res.json(newNote);
-});
 
 // Starts the server to begin listening
 // =============================================================
