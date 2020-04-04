@@ -23,7 +23,7 @@ app.get("/api/notes", function(req, res) {
     if (err){
       return res.send("Problem retrieving notes.")
     }
-    // console.log("Res: "+JSON.stringify(r));
+    
     return res.json(r);
   });  
 });
