@@ -62,7 +62,9 @@ app.post("/api/notes", function(req, res) {
   // This works because of our body parsing middleware
   var newNote = req.body;
   newNote.id = uuidv4();
-
+  fs.writeFile("./db/db.json", newNote, function(err,r) {
+    
+  })
   res.json(newNote);
 });
 
